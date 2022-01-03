@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Location;
 use App\Models\Supplier;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -144,5 +145,53 @@ class ProductController extends Controller
     }
 
     // -------------------------
-    // create Product
+
+    /*
+        'name',
+        'model',
+        'price',
+        'discount_price',
+        'base_price',
+        'quantity_shop',
+        'quantity_warehouse',
+        'location_id',
+        'category_id',
+        'brand_id',
+        'supplier_id',
+        'date_input',
+        'sold'
+    */
+    
+    public function createProduct(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'model' => 'required|string|unique:products,model',
+            'price' => 'required|integer',
+            'discount_price' => 'required|integer',
+            'base_price' => 'required|integer',
+            'quantity_shop' => 'required|integer',
+            'quantity_warehouse' => 'required|integer',
+            'location_id' => 'required|integer',
+            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
+            'supplier_id' => 'required|integer'
+        ]); 
+        
+        $product = Product::create([
+            'name' => $data['name'],
+            'model' => $data['model'],
+            'price' => $data['price'],
+            'discount_price' => $data['discount_price'],
+            'base_price' => $data['base_price'],
+            'quantity_shop' => $data['quantity_shop'],
+            'quantity_warehouse' => $data['quantity_warehouse'],
+            'location_id' => $data['location_id'],
+            'category_id' => $data['category_id'],
+            'brand_id' => $data['brand_id'],
+            'supplier_id' => $data['supplier_id']
+        ]);
+
+        return response($product, 200);
+    }
 }

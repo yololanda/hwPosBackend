@@ -18,16 +18,14 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('model');
             $table->bigInteger('price');
+            $table->bigInteger('discount_price')->nullable();
             $table->bigInteger('base_price');
-            $table->bigInteger('discount_first')->nullable();
-            $table->bigInteger('discount_second')->nullable();
             $table->integer('quantity_shop');
             $table->integer('quantity_warehouse');
             $table->integer('location_id');
             $table->integer('category_id');
             $table->integer('brand_id');
             $table->integer('supplier_id');
-            $table->string('date_input');
             $table->bigInteger('sold')->nullable();
             $table->timestamps();
         });

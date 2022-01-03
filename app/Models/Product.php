@@ -13,16 +13,14 @@ class Product extends Model
         'name',
         'model',
         'price',
+        'discount_price',
         'base_price',
-        'discount_first',
-        'discount_second',
         'quantity_shop',
         'quantity_warehouse',
         'location_id',
         'category_id',
         'brand_id',
         'supplier_id',
-        'date_input',
         'sold'
     ];
 }
