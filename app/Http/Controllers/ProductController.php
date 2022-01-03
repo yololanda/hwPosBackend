@@ -167,7 +167,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'model' => 'required|string|unique:products,model',
-            'price' => 'required|integer',
+            'price' => 'required|integer|gt:0',
             'discount_price' => 'required|integer',
             'base_price' => 'required|integer',
             'quantity_shop' => 'required|integer',
@@ -175,21 +175,26 @@ class ProductController extends Controller
             'location_id' => 'required|integer',
             'category_id' => 'required|integer',
             'brand_id' => 'required|integer',
-            'supplier_id' => 'required|integer'
+            'supplier_id' => 'required|integer',
+            'supplier_model' => 'required|string'
         ]); 
         
         $product = Product::create([
             'name' => $data['name'],
             'model' => $data['model'],
+
+            'category_id' => $data['category_id'],
+            'location_id' => $data['location_id'],
+            'brand_id' => $data['brand_id'],
+            'supplier_id' => $data['supplier_id'],
+            'supplier_model' => $data['supplier_model'],
+
             'price' => $data['price'],
             'discount_price' => $data['discount_price'],
             'base_price' => $data['base_price'],
             'quantity_shop' => $data['quantity_shop'],
             'quantity_warehouse' => $data['quantity_warehouse'],
-            'location_id' => $data['location_id'],
-            'category_id' => $data['category_id'],
-            'brand_id' => $data['brand_id'],
-            'supplier_id' => $data['supplier_id']
+            
         ]);
 
         return response($product, 200);

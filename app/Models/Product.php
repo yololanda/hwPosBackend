@@ -21,6 +21,7 @@ class Product extends Model
         'category_id',
         'brand_id',
         'supplier_id',
+        'supplier_model',
         'sold'
     ];
 }

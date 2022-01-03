@@ -20,13 +20,14 @@ class CreateProductsTable extends Migration
             $table->bigInteger('price');
             $table->bigInteger('discount_price')->nullable();
             $table->bigInteger('base_price');
-            $table->integer('quantity_shop');
-            $table->integer('quantity_warehouse');
+            $table->integer('quantity_shop')->default('0');
+            $table->integer('quantity_warehouse')->default('0');
             $table->integer('location_id');
             $table->integer('category_id');
             $table->integer('brand_id');
             $table->integer('supplier_id');
-            $table->bigInteger('sold')->nullable();
+            $table->string('supplier_model')->default('OEM');
+            $table->bigInteger('sold')->default('0');
             $table->timestamps();
         });
     }
