@@ -19,9 +19,21 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('id_toko')->nullable();
+            $table->integer('role')->comment('1 = admin, 2 = supervisor, 3 = employee');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert(
+            array(
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'id_toko' => 1,
+                'role' => 1,
+                'password' => bcrypt('admin94')
+            )
+        );
     }
 
     /**

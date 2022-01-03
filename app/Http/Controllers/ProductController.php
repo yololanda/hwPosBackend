@@ -143,4 +143,6 @@ class ProductController extends Controller
         return Supplier::destroy($id);
     }
 
+    // -------------------------
+    // create Product
 }
