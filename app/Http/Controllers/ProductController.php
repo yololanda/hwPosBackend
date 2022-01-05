@@ -199,4 +199,33 @@ class ProductController extends Controller
 
         return response($product, 200);
     }
+
+    public function getProducts(Request $request)
+    {
+        $products = Product::orderBy('id', 'desc')->paginate(5);
+
+        return $products;
+    }
+
+    public function deleteProduct($id)
+    {
+        return Product::destroy($id);
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->update($request->all());
+        return $product;
+    }
+
+    public function findProduct(Request $request)
+    {
+        $inputModel = $request['model'];
+        $inputModel = trim(preg_replace('/\s+/', ' ', $inputModel));
+
+        $model = Product::where("model", "LIKE", "%" . $inputModel . "%");
+        return $model->get();
+    }
+
 }

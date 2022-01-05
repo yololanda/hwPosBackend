@@ -19,6 +19,12 @@ Route::get('/brand', [ProductController::class, 'getBrand']);
 Route::get('/location', [ProductController::class, 'getlocation']);
 Route::get('/supplier', [ProductController::class, 'getSupplier']);
 
+Route::get('/product', [ProductController::class, 'getProducts']);
+Route::delete('/product/{id}', [ProductController::class, 'deleteProduct']);
+Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
+Route::post('/product/find', [ProductController::class, 'findProduct']);
+
+
 // protected Routed, required TOKEN access
 Route::group(['middleware' => ['auth:sanctum']], function () {
    
@@ -39,7 +45,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/supplier/{id}', [ProductController::class, 'deleteSupplier']);
 
     Route::post('/product', [ProductController::class, 'createProduct']);
-
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
