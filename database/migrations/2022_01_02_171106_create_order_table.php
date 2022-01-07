@@ -13,10 +13,12 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('saler');
             $table->bigInteger('total')->default(0);
+            $table->bigInteger('modal')->default(0);
+            $table->bigInteger('profit')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('orders');
     }
 }

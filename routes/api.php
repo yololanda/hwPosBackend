@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // you need to call the controller file on route
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/products', function() {
     return 'Ini Product loh';
@@ -25,6 +26,12 @@ Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
 Route::post('/product/find', [ProductController::class, 'findProduct']);
 
 
+Route::post('/location', [ProductController::class, 'createLocation']);
+
+Route::post('/order', [OrderController::class, 'createOrder']);
+Route::post('/orderdetail', [OrderController::class, 'createOrderDetail']);
+Route::post('/deductquantity/{id}', [OrderController::class, 'updateProductQty']);
+
 // protected Routed, required TOKEN access
 Route::group(['middleware' => ['auth:sanctum']], function () {
    
@@ -36,7 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/brand/{id}', [ProductController::class, 'updateBrand']);
     Route::delete('/brand/{id}', [ProductController::class, 'deleteBrand']);
 
-    Route::post('/location', [ProductController::class, 'createLocation']);
+   
     Route::put('/location/{id}', [ProductController::class, 'updateLocation']);
     Route::delete('/location/{id}', [ProductController::class, 'deleteLocation']);
 
