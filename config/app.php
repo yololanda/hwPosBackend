@@ -67,6 +67,10 @@ return [
     |
     */
 
+    /*
+    run this so it will work
+    php artisan config:cache
+    */
     'timezone' => 'Asia/Jakarta',
     'locale' => 'id',
 
@@ -81,7 +85,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+
 
     /*
     |--------------------------------------------------------------------------

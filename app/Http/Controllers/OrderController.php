@@ -7,15 +7,21 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 
+use Carbon\Carbon;
+
+
 class OrderController extends Controller
 {
     public function createOrder(Request $request)
     {
+        $orderTime = Carbon::now();
+        $orderTime = $orderTime->format('d-m-y H:i');
         $order = Order::create([
             'saler' => $request['saler'],
             'total' => $request['total'],
             'modal' => $request['modal'],
-            'profit' => $request['profit']
+            'profit' => $request['profit'],
+            'tanggal' => $orderTime
         ]);
         return response($order, 200);
     }
@@ -46,10 +52,28 @@ class OrderController extends Controller
     public function getOrders(Request $request) 
     {
         // today
-        $orders = Order::whereDate('created_at', '>=', date('Y-m-d'))->get();
+        $orders = Order::whereDate('created_at', '>=', date('Y-m-d'))
+        ->orderByDesc('id')->get();
   
+        //echo Carbon::now();
         // five days ago
         //$orders = Order::whereDate('created_at', '>=', date('Y-m-d', strtotime("-5 day")) )->get();
         return response($orders, 200);
+    }
+
+    public function getOrderDetail(Request $request, $id )
+    {
+        $orderDetail = OrderDetail::where('order_id', '=', $id)->get();
+
+        return $orderDetail;
+    }
+
+    public function sumProfit(Request $request)
+    {
+        $total = Order::selectRaw('SUM(profit) as total')
+        ->whereDate('created_at', '>=', date('Y-m-d'))
+        ->get();
+
+        return response($total, 200);
     }
 }

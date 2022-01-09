@@ -19,6 +19,7 @@ class CreateOrderTable extends Migration
             $table->bigInteger('total')->default(0);
             $table->bigInteger('modal')->default(0);
             $table->bigInteger('profit')->default(0);
+            $table->string('tanggal');
             $table->timestamps();
         });
     }

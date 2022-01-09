@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->integer('supplier_id');
             $table->string('supplier_model')->default('OEM');
             $table->bigInteger('sold')->default('0');
+            $table->string('tanggal_masuk');
             $table->timestamps();
         });
     }

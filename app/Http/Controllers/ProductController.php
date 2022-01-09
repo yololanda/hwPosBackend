@@ -11,6 +11,8 @@ use App\Models\Location;
 use App\Models\Supplier;
 use App\Models\Product;
 
+use Carbon\Carbon;
+
 class ProductController extends Controller
 {
     public function getCategory(Request $request)
@@ -164,6 +166,9 @@ class ProductController extends Controller
     
     public function createProduct(Request $request)
     {
+        $inputTime = Carbon::now();
+        $inputTime = $inputTime->format('d-m-y H:i');
+
         $data = $request->validate([
             'name' => 'required|string',
             'model' => 'required|string|unique:products,model',
@@ -194,6 +199,7 @@ class ProductController extends Controller
             'base_price' => $data['base_price'],
             'quantity_shop' => $data['quantity_shop'],
             'quantity_warehouse' => $data['quantity_warehouse'],
+            'tanggal_masuk' => $inputTime
             
         ]);
 

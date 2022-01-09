@@ -22,6 +22,7 @@ class Product extends Model
         'brand_id',
         'supplier_id',
         'supplier_model',
-        'sold'
+        'sold',
+        'tanggal_masuk'
     ];
 }

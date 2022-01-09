@@ -13,11 +13,12 @@ class Order extends Model
         'saler',
         'total',
         'modal',
-        'profit'
+        'profit',
+        'tanggal',
     ];
 
     // customizing date format, $casts is a must 
-    protected $casts = [
-        'created_at' => 'datetime:d-m-Y H:i'
-    ];
+    // protected $casts = [
+    //     'created_at' => 'datetime:d-m-Y H:i'
+    // ];
 }
