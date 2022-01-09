@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('model');
+            $table->string('image')->nullable();
             $table->bigInteger('price');
             $table->bigInteger('discount_price')->nullable();
             $table->bigInteger('base_price');

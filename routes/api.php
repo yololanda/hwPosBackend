@@ -31,6 +31,7 @@ Route::post('/location', [ProductController::class, 'createLocation']);
 Route::post('/order', [OrderController::class, 'createOrder']);
 Route::post('/orderdetail', [OrderController::class, 'createOrderDetail']);
 Route::post('/deductquantity/{id}', [OrderController::class, 'updateProductQty']);
+Route::get('/order', [OrderController::class, 'getOrders']);
 
 // protected Routed, required TOKEN access
 Route::group(['middleware' => ['auth:sanctum']], function () {

@@ -15,4 +15,9 @@ class Order extends Model
         'modal',
         'profit'
     ];
+
+    // customizing date format, $casts is a must 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y H:i'
+    ];
 }

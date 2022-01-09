@@ -36,10 +36,20 @@ class OrderController extends Controller
     public function updateProductQty(Request $request, $id)
     {
         $quantity = (int)$request['quantity'];
-       $product = Product::find($id);
-       $product->decrement('quantity_shop', $quantity);
-       $product->sold = ($product->sold + $quantity);
-       $product->save();
+        $product = Product::find($id);
+        $product->decrement('quantity_shop', $quantity);
+        $product->sold = ($product->sold + $quantity);
+        $product->save();
         return $quantity;
+    }
+
+    public function getOrders(Request $request) 
+    {
+        // today
+        $orders = Order::whereDate('created_at', '>=', date('Y-m-d'))->get();
+  
+        // five days ago
+        //$orders = Order::whereDate('created_at', '>=', date('Y-m-d', strtotime("-5 day")) )->get();
+        return response($orders, 200);
     }
 }
