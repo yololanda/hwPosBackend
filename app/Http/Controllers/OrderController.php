@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\ProductReturn;
 
 use Carbon\Carbon;
 
@@ -70,10 +71,31 @@ class OrderController extends Controller
 
     public function sumProfit(Request $request)
     {
-        $total = Order::selectRaw('SUM(profit) as total')
+        $total = Order::selectRaw('IFNULL(SUM(profit), 0) as total')
         ->whereDate('created_at', '>=', date('Y-m-d'))
         ->get();
 
         return response($total, 200);
+    }
+
+    public function setReturnProduct(Request $request)
+    {
+        $returnTime = Carbon::now();
+        $productReturn = ProductReturn::create([
+            'order_id' => $request['order_id'],
+            'product_id' => $request['product_id'],
+            'model' => $request['model'],
+            'quantity' => $request['quantity'],
+            'price' => $request['price'],
+            'subtotal' => ($request['quantity'] * $request['price']),
+            'reason' => $request['reason'],
+            'tanggal'=> $returnTime
+        ]);
+
+        $updateOrderDetail = OrderDetail::where('order_id', $request['order_id'])
+                            ->where('product_id', $request['product_id'])
+                            ->update(['return' => 1, 'return_quantity' => $request['quantity']]);
+        
+        return response($updateOrderDetail, 200);
     }
 }

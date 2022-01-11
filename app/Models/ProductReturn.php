@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class ProductReturn extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,8 @@ class OrderDetail extends Model
         'quantity',
         'price',
         'subtotal',
-        'return',
-        'return_quantity'
+        'reason',
+        'tanggal',
+        'checked'
     ];
 }
