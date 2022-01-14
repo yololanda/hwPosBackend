@@ -25,6 +25,7 @@ Route::delete('/product/{id}', [ProductController::class, 'deleteProduct']);
 Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
 Route::post('/product/find', [ProductController::class, 'findProduct']);
 
+Route::get('/productcategory/{id}', [ProductController::class, 'getProductsByCategory']);
 
 Route::post('/location', [ProductController::class, 'createLocation']);
 
@@ -37,10 +38,12 @@ Route::post('/orderreturn', [OrderController::class, 'setReturnProduct']);
 
 Route::get('/profit', [OrderController::class, 'sumProfit']);
 
+Route::post('/categories', [ProductController::class, 'createCategory']);
+
 // protected Routed, required TOKEN access
 Route::group(['middleware' => ['auth:sanctum']], function () {
    
-    Route::post('/categories', [ProductController::class, 'createCategory']);
+    
     Route::put('/categories/{id}', [ProductController::class, 'updateCategory']);
     Route::delete('/categories/{id}', [ProductController::class, 'deleteCategory']);
 

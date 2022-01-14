@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function getCategory(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name', 'asc')->get();
         $categories->makeHidden(['created_at','updated_at']);
         return response($categories, 200);
     }
@@ -232,6 +232,13 @@ class ProductController extends Controller
 
         $model = Product::where("model", "LIKE", "%" . $inputModel . "%");
         return $model->get();
+    }
+
+    public function getProductsByCategory(Request $request, $id)
+    {
+        $products = Product::where("category_id", "=", $id)->get();
+
+        return $products;
     }
 
 }
