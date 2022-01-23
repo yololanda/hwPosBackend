@@ -234,9 +234,25 @@ class ProductController extends Controller
         return $model->get();
     }
 
+    public function findModel(Request $request)
+    {
+        $inputModel = $request['model'];
+        $inputModel = trim(preg_replace('/\s+/', ' ', $inputModel));
+
+        $model = Product::where("model", "=", $inputModel );
+        return $model->get();
+    }
+
     public function getProductsByCategory(Request $request, $id)
     {
         $products = Product::where("category_id", "=", $id)->get();
+
+        return $products;
+    }
+
+    public function getProductsByLocation(Request $request, $id)
+    {
+        $products = Product::where("location_id", "=", $id)->get();
 
         return $products;
     }

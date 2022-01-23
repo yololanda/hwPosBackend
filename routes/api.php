@@ -24,8 +24,10 @@ Route::get('/product', [ProductController::class, 'getProducts']);
 Route::delete('/product/{id}', [ProductController::class, 'deleteProduct']);
 Route::put('/product/{id}', [ProductController::class, 'updateProduct']);
 Route::post('/product/find', [ProductController::class, 'findProduct']);
+Route::post('/product/scan', [ProductController::class, 'findModel']);
 
 Route::get('/productcategory/{id}', [ProductController::class, 'getProductsByCategory']);
+Route::get('/productlocation/{id}', [ProductController::class, 'getProductsByLocation']);
 
 Route::post('/location', [ProductController::class, 'createLocation']);
 
